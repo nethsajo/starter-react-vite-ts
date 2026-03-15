@@ -1,0 +1,53 @@
+{
+  "name": "starter-react-vite-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "start": "vite preview",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --write '**/*.ts{,x}'",
+    "check:types": "tsc",
+    "check:spell": "git diff --name-only | npx cspell --no-summary --no-progress --no-must-find-files --file-list stdin",
+    "check:all": "concurrently \"pnpm lint\" \"pnpm check:types\" \"pnpm check:spell\"",
+    "pre-commit": "concurrently \"lint-staged --allow-empty\" \"pnpm check:types\" \"pnpm check:spell\"",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^20.4.4",
+    "@commitlint/config-conventional": "^20.4.4",
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "concurrently": "^9.2.1",
+    "cspell": "^9.7.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4",
+    "vite-plugin-svgr": "^4.5.0"
+  }
+}
