@@ -9,38 +9,61 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProtectedLayoutRouteImport } from './routes/_protected/layout'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProtectedSampleRouteImport } from './routes/_protected/sample'
 
+const ProtectedLayoutRoute = ProtectedLayoutRouteImport.update({
+  id: '/_protected',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProtectedSampleRoute = ProtectedSampleRouteImport.update({
+  id: '/sample',
+  path: '/sample',
+  getParentRoute: () => ProtectedLayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/sample': typeof ProtectedSampleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sample': typeof ProtectedSampleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_protected': typeof ProtectedLayoutRouteWithChildren
+  '/_protected/sample': typeof ProtectedSampleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/sample'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/sample'
+  id: '__root__' | '/' | '/_protected' | '/_protected/sample'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProtectedLayoutRoute: typeof ProtectedLayoutRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_protected': {
+      id: '/_protected'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ProtectedLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +71,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_protected/sample': {
+      id: '/_protected/sample'
+      path: '/sample'
+      fullPath: '/sample'
+      preLoaderRoute: typeof ProtectedSampleRouteImport
+      parentRoute: typeof ProtectedLayoutRoute
+    }
   }
 }
 
+interface ProtectedLayoutRouteChildren {
+  ProtectedSampleRoute: typeof ProtectedSampleRoute
+}
+
+const ProtectedLayoutRouteChildren: ProtectedLayoutRouteChildren = {
+  ProtectedSampleRoute: ProtectedSampleRoute,
+}
+
+const ProtectedLayoutRouteWithChildren = ProtectedLayoutRoute._addFileChildren(
+  ProtectedLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProtectedLayoutRoute: ProtectedLayoutRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

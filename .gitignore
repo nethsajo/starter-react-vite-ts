@@ -10,6 +10,7 @@ dist/
 *.sln
 *.sw?
 *.tsbuildinfo
+*.tanstack
 
 # custom
 *-lock.json
