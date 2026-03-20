@@ -1,1 +1,12 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400..900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-sm;
+  }
+}

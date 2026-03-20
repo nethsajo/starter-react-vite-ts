@@ -14,7 +14,7 @@
     "check:spell": "git diff --name-only | npx cspell --no-summary --no-progress --no-must-find-files --file-list stdin",
     "check:all": "concurrently \"pnpm lint\" \"pnpm check:types\" \"pnpm check:spell\"",
     "pre-commit": "concurrently \"lint-staged --allow-empty\" \"pnpm check:types\" \"pnpm check:spell\"",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.167.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -31,6 +32,8 @@
     "@commitlint/config-conventional": "^20.4.4",
     "@eslint/js": "^9.39.1",
     "@tailwindcss/vite": "^4.2.1",
+    "@tanstack/react-router-devtools": "^1.166.9",
+    "@tanstack/router-plugin": "^1.166.14",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -46,6 +49,8 @@
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.2.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
