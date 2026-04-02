@@ -1,3 +1,4 @@
+import { DashedGridBackground } from '@/components/dashed-grid-background';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,7 +26,7 @@ type Feature = {
 
 function FeatureCard({ icon, title, children }: Feature) {
   return (
-    <div className="group border-border bg-card hover:border-primary/50 rounded-lg border p-6 transition-colors">
+    <div className="group border-border bg-card hover:border-primary/20 rounded-lg border p-6 transition-colors">
       <HugeiconsIcon icon={icon} className="mb-4 size-8 text-blue-500" />
       <h3 className="text-foreground mb-2 text-xl font-semibold">{title}</h3>
       <p className="text-muted-foreground">{children}</p>
@@ -44,56 +45,10 @@ function IndexPage() {
 
   return (
     <div className="relative min-h-screen w-full bg-white">
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `
-        linear-gradient(to right, #e7e5e4 1px, transparent 1px),
-        linear-gradient(to bottom, #e7e5e4 1px, transparent 1px)
-      `,
-          backgroundSize: '20px 20px',
-          backgroundPosition: '0 0, 0 0',
-          maskImage: `
-        repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          WebkitMaskImage: `
- repeating-linear-gradient(
-              to right,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            repeating-linear-gradient(
-              to bottom,
-              black 0px,
-              black 3px,
-              transparent 3px,
-              transparent 8px
-            ),
-            radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)
-      `,
-          maskComposite: 'intersect',
-          WebkitMaskComposite: 'source-in',
-        }}
-      />
+      <DashedGridBackground />
       <div className="relative z-10 container mx-auto flex flex-col gap-16 px-4 py-20 sm:px-6">
         <section className="flex flex-col items-center gap-8 text-center">
-          <div className="space-y-4">
+          <div className="space-y-8">
             <Badge className="h-7 bg-blue-100 py-1.5 font-semibold text-blue-600 [&>svg]:size-4!">
               <HugeiconsIcon
                 icon={ZapIcon}
