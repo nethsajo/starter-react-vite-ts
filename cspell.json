@@ -9,14 +9,8 @@
     "sonner",
     "tanstack",
     "Todos",
+    "Hugeicons",
     "zustand"
   ],
-  "ignorePaths": [
-    "node_modules/",
-    "dist/",
-    ".vscode/",
-    ".husky",
-    "pnpm-lock.yaml",
-    "package.json"
-  ]
+  "ignorePaths": ["node_modules/", "dist/", ".vscode/", ".husky", "pnpm-lock.yaml", "package.json"]
 }
