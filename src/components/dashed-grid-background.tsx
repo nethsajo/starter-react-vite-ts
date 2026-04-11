@@ -1,7 +1,7 @@
 export function DashedGridBackground() {
   return (
     <div
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 -z-10"
       style={{
         backgroundImage: `
         linear-gradient(to right, #e7e5e4 1px, transparent 1px),

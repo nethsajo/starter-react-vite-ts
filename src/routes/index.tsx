@@ -54,7 +54,7 @@ function IndexPage() {
             />
             Lightning-fast development
           </Badge>
-          <h1 className="text-foreground text-5xl leading-none font-bold sm:text-6xl sm:tracking-tight">
+          <h1 className="text-foreground text-5xl leading-none font-bold tracking-tight sm:text-6xl">
             React Vite TypeScript <br />
             Starter
           </h1>

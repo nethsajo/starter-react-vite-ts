@@ -1,6 +1,11 @@
+import { DashedGridBackground } from '@/components/dashed-grid-background';
+import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/navbar';
+import { cn } from '@/lib/utils';
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
+import '../global.css';
 
 export const Route = createRootRoute({
   component: RootPage,
@@ -37,9 +42,14 @@ function RootPage() {
   return (
     <React.Fragment>
       <HeadContent />
-      <div className="flex min-h-screen flex-col">
-        <div className="flex-1">
-          <Outlet />
+      <div className="relative min-h-screen font-sans antialiased">
+        <DashedGridBackground />
+        <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
+          <Navbar />
+          <main className={cn('h-full w-full')}>
+            <Outlet />
+          </main>
+          <Footer />
         </div>
       </div>
       <TanStackDevtools />

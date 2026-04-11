@@ -5,5 +5,5 @@ export const Route = createFileRoute('/_protected/sample')({
 });
 
 function RouteComponent() {
-  return <div>Hello "/_protected/sample"!</div>;
+  return <div className="container mx-auto px-4 py-14 sm:px-6">Hello "/_protected/sample"!</div>;
 }
