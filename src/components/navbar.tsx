@@ -13,12 +13,12 @@ export function Navbar() {
   return (
     <div className="supports-backdrop-filter:bg-background/50 shadow-primary/5 sticky top-0 z-50 h-16 w-full shrink-0 border-b border-dashed shadow-sm backdrop-blur-sm">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-8 px-4 sm:px-6">
-        <div className="flex items-center gap-1">
+        <Link to="/" className="flex items-center gap-1">
           <HugeiconsIcon icon={ReactIcon} className="size-8 text-blue-700" />
           <p className="text-primary text-xl font-bold tracking-tighter">
             React <span className="text-muted-foreground">Vite</span>
           </p>
-        </div>
+        </Link>
         <div className="absolute left-1/2 -translate-x-1/2">
           <NavigationMenu>
             <NavigationMenuList>
