@@ -1,33 +1,54 @@
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
 
-# Misc
-.idea
-.DS_Store
+# Secrets
+.secrets/
+credentials.json
+
+# Turborepo
+.turbo/
+**/.turbo/
+
+# Testing
+coverage/
+
+# Environment files
+.*.vars
+.env
+.env.*
+.env-*
+!**.example
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-*.tsbuildinfo
-*.tanstack
-
-# custom
-*-lock.json
-*.lock
-
-# env
-.env
-.env.*
-.env-*
-!**.example
-*.local
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Lock files (use pnpm-lock.yaml)
+package-lock.json
+yarn.lock
+
+# Local config
+*.local
+
+.pnpm-store/
