@@ -1,6 +1,7 @@
 import { Toaster } from '@/components/ui/sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { LayoutsProvider } from './contexts/layouts';
 import { routeTree } from './routeTree.gen';
 
 const queryClient = new QueryClient({
@@ -28,11 +29,11 @@ declare module '@tanstack/react-router' {
 
 export function App() {
   return (
-    <>
+    <LayoutsProvider>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <Toaster position="top-right" />
       </QueryClientProvider>
-    </>
+    </LayoutsProvider>
   );
 }

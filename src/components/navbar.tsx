@@ -54,7 +54,9 @@ export function Navbar() {
           </NavigationMenu>
         </div>
         <div className="">
-          <Button className="rounded-md">Login</Button>
+          <Button asChild className="rounded-md">
+            <Link to="/login">Login</Link>
+          </Button>
         </div>
       </div>
     </div>

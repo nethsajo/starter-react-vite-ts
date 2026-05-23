@@ -1,3 +1,4 @@
+import { DashedGridBackground } from '@/components/dashed-grid-background';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -44,6 +45,7 @@ function IndexPage() {
 
   return (
     <div className="relative z-10 container mx-auto flex flex-col gap-12 px-4 py-14 sm:px-6">
+      <DashedGridBackground />
       <section className="flex flex-col items-center gap-8 text-center">
         <div className="space-y-8">
           <Badge className="h-7 bg-blue-100 py-1.5 font-semibold text-blue-600 [&>svg]:size-4!">

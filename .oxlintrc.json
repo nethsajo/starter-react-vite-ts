@@ -8,6 +8,7 @@
   },
   "rules": {
     "no-console": "allow",
+    "no-constant-condition": "error",
     "typescript/no-explicit-any": "allow",
     "typescript/consistent-type-imports": "warn",
     "typescript/no-import-type-side-effects": "warn",

@@ -1,6 +1,6 @@
-import { DashedGridBackground } from '@/components/dashed-grid-background';
 import { Footer } from '@/components/footer';
 import { Navbar } from '@/components/navbar';
+import { useLayoutsContext } from '@/contexts/layouts';
 import { cn } from '@/lib/utils';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';
@@ -40,17 +40,18 @@ export const Route = createRootRoute({
 });
 
 function RootPage() {
+  const { hideNavbar, hideFooter } = useLayoutsContext();
+
   return (
     <React.Fragment>
       <HeadContent />
       <div className="relative min-h-screen font-sans antialiased">
-        <DashedGridBackground />
         <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
-          <Navbar />
+          {!hideNavbar && <Navbar />}
           <main className={cn('h-full w-full')}>
             <Outlet />
           </main>
-          <Footer />
+          {!hideFooter && <Footer />}
         </div>
       </div>
       <TanStackDevtools />
