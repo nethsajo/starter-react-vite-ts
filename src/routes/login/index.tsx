@@ -167,6 +167,7 @@ function LoginPage() {
                 className="w-full cursor-pointer active:translate-y-1"
                 disabled={false}
               >
+                Login
                 {/* {false ? 'Logging in...' : 'Login'} */}
               </Button>
               <div className="my-4 flex items-center">
