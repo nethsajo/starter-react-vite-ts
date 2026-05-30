@@ -24,8 +24,8 @@ export const validations: Validations[] = [
     label: 'Contains number',
     validate: value => /\d/.test(value),
   },
-  {
-    label: 'Maximum 16 characters',
-    validate: value => value.length <= 16,
-  },
+  // {
+  //   label: 'Maximum 16 characters',
+  //   validate: value => value.length <= 16,
+  // },
 ];

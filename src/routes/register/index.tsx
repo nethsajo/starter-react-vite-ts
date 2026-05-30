@@ -62,7 +62,6 @@ function RouteComponent() {
       password: '',
       confirmPassword: '',
     },
-    mode: 'onTouched',
   });
 
   const password = form.watch('password', '');
@@ -97,12 +96,14 @@ function RouteComponent() {
         <form id="register" onSubmit={handleSubmit}>
           <FieldGroup>
             <FieldSet>
-              <FieldLegend className="font-bold data-[variant=legend]:text-3xl">
+              <FieldLegend className="font-bold text-center data-[variant=legend]:text-3xl">
                 Create account
               </FieldLegend>
-              <FieldDescription>
+              <FieldDescription className="text-center">
                 Enter your information below to create your account and get started
               </FieldDescription>
+            </FieldSet>
+            <FieldSet>
               <FieldGroup>
                 <div className="grid gap-7 sm:grid-cols-2">
                   <Controller
@@ -196,7 +197,7 @@ function RouteComponent() {
                         <FieldError errors={[fieldState.error]} className="whitespace-pre-line" />
                       )}
                       {password && !isPasswordValid && isPasswordFocused && (
-                        <PasswordValidationIndicator password={password} className="mt-3" />
+                        <PasswordValidationIndicator password={password} />
                       )}
                     </Field>
                   )}
