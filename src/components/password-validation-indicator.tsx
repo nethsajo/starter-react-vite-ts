@@ -1,8 +1,8 @@
-import { cn } from '@/lib/utils';
-import { validations } from '@/utils/password-validations';
 import { Cancel01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
+import { validations } from '@/utils/password-validations';
 
 type PasswordIndicatorProps = {
   password: string;
@@ -53,7 +53,7 @@ export function PasswordValidationIndicator({ password, className }: PasswordInd
           />
         ))}
       </div>
-      <p className="text-foreground mb-2 text-sm font-medium">
+      <p className="mb-2 text-sm font-medium text-foreground">
         {getText(strengthScore)}. Password requirements:
       </p>
       <ul className="flex flex-col gap-1.5">

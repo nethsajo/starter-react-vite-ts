@@ -7,13 +7,20 @@
     }
   },
   "rules": {
-    "no-console": "allow",
+    "no-console": "off",
     "no-constant-condition": "error",
-    "typescript/no-explicit-any": "allow",
+    "typescript/no-explicit-any": ["error", { "fixToUnknown": true }],
     "typescript/consistent-type-imports": "warn",
     "typescript/no-import-type-side-effects": "warn",
     "react/exhaustive-deps": "allow",
-    "react/jsx-curly-brace-presence": "deny",
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "props": "never",
+        "children": "never",
+        "propElementValues": "always"
+      }
+    ],
     "react/no-unescaped-entities": "warn",
     "react/rules-of-hooks": "allow"
   },

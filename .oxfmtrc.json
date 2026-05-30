@@ -7,5 +7,20 @@
   "trailingComma": "es5",
   "arrowParens": "avoid",
   "sortPackageJson": false,
+  "sortImports": {
+    "newlinesBetween": false,
+    "groups": [
+      ["value-builtin", "value-external"],
+      ["value-internal", "value-parent", "value-sibling", "value-index"],
+      { "newlinesBetween": true },
+      "type-import",
+      "unknown"
+    ]
+  },
+  "sortTailwindcss": {
+    "stylesheet": "./src/global.css",
+    "functions": ["clsx", "cn"],
+    "preserveWhitespace": true
+  },
   "ignorePatterns": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "**/routeTree.gen.ts"]
 }

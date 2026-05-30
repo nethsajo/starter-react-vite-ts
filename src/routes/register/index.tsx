@@ -1,3 +1,10 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ViewIcon, ViewOffSlashIcon } from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
+import { z } from 'zod';
 import { PasswordValidationIndicator } from '@/components/password-validation-indicator';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,16 +25,9 @@ import {
 } from '@/components/ui/input-group';
 import { useLayoutsContext } from '@/contexts/layouts';
 import { emailSchema, firstNameSchema, lastNameSchema, passwordSchema } from '@/utils/zod-schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ViewIcon, ViewOffSlashIcon } from '@hugeicons/core-free-icons';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
-import { z } from 'zod';
 
 export const Route = createFileRoute('/register/')({
-  component: RouteComponent,
+  component: RegisterPage,
 });
 
 export const registerSchema = z
@@ -45,7 +45,7 @@ export const registerSchema = z
 
 export type RegisterSchema = z.infer<typeof registerSchema>;
 
-function RouteComponent() {
+function RegisterPage() {
   const { setHideNavbar, setHideFooter } = useLayoutsContext();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -96,7 +96,7 @@ function RouteComponent() {
         <form id="register" onSubmit={handleSubmit}>
           <FieldGroup>
             <FieldSet>
-              <FieldLegend className="font-bold text-center data-[variant=legend]:text-3xl">
+              <FieldLegend className="text-center font-bold data-[variant=legend]:text-3xl">
                 Create account
               </FieldLegend>
               <FieldDescription className="text-center">
@@ -274,11 +274,11 @@ function RouteComponent() {
               </Button>
             </Field>
             <Field orientation="vertical">
-              <div className="text-muted-foreground text-center text-sm">
+              <div className="text-center text-sm text-muted-foreground">
                 Already have an account?{' '}
                 <Link
                   to="/login"
-                  className="text-primary font-medium underline-offset-4 hover:underline"
+                  className="font-medium text-primary underline-offset-4 hover:underline"
                 >
                   Sign in
                 </Link>{' '}

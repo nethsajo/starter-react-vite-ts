@@ -1,10 +1,11 @@
+import z from 'zod';
 import { STAGES } from '@/constants/env';
 import { envConfig } from '@/env';
-import z from 'zod';
 
 export const emailSchema = z
   .string()
   .trim()
+  .min(1, 'Email is required')
   .email()
   .toLowerCase()
   .refine(email => {

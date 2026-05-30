@@ -1,11 +1,11 @@
-import { Footer } from '@/components/footer';
-import { Navbar } from '@/components/navbar';
-import { useLayoutsContext } from '@/contexts/layouts';
-import { cn } from '@/lib/utils';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
+import { Footer } from '@/components/footer';
+import { Navbar } from '@/components/navbar';
+import { useLayoutsContext } from '@/contexts/layouts';
+import { cn } from '@/lib/utils';
 import '../global.css';
 
 export const Route = createRootRoute({

@@ -1,3 +1,7 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { useCreateSampleMutation } from '../_hooks/query/use-create-sample-mutation';
 import {
   Field,
   FieldDescription,
@@ -8,10 +12,6 @@ import {
   FieldSet,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { useCreateSampleMutation } from '../_hooks/query/use-create-sample-mutation';
 
 export const addSampleSchema = z.object({
   title: z.string().min(1, 'Title is required'),
@@ -40,12 +40,12 @@ export const AddSampleForm = () => {
   };
 
   return (
-    <div className="border-border bg-card overflow-hidden rounded-lg border">
-      <div className="border-border bg-muted flex items-center gap-2 border-b px-4 py-2">
+    <div className="overflow-hidden rounded-lg border border-border bg-card">
+      <div className="flex items-center gap-2 border-b border-border bg-muted px-4 py-2">
         <div className="h-3 w-3 rounded-full bg-red-500/80" />
         <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
         <div className="h-3 w-3 rounded-full bg-green-500/80" />
-        <span className="text-muted-foreground ml-2 font-mono text-xs">create-sample.tsx</span>
+        <span className="ml-2 font-mono text-xs text-muted-foreground">create-sample.tsx</span>
       </div>
       <div className="p-6">
         <form id="create-sample" onSubmit={form.handleSubmit(onSubmit)}>

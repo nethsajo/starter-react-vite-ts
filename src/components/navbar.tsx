@@ -11,11 +11,11 @@ import {
 
 export function Navbar() {
   return (
-    <div className="supports-backdrop-filter:bg-background/50 shadow-primary/5 sticky top-0 z-50 h-16 w-full shrink-0 border-b border-dashed shadow-sm backdrop-blur-sm">
+    <div className="sticky top-0 z-50 h-16 w-full shrink-0 border-b border-dashed shadow-sm shadow-primary/5 backdrop-blur-sm supports-backdrop-filter:bg-background/50">
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between gap-8 px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-1">
           <HugeiconsIcon icon={ReactIcon} className="size-8 text-blue-700" />
-          <p className="text-primary text-xl font-bold tracking-tighter">
+          <p className="text-xl font-bold tracking-tighter text-primary">
             React <span className="text-muted-foreground">Vite</span>
           </p>
         </Link>

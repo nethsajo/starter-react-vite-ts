@@ -1,6 +1,3 @@
-import { DashedGridBackground } from '@/components/dashed-grid-background';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   ArrowRight01Icon,
   Copy01Icon,
@@ -13,6 +10,9 @@ import {
 import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import React, { useState } from 'react';
+import { DashedGridBackground } from '@/components/dashed-grid-background';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/')({
   component: IndexPage,
@@ -26,9 +26,9 @@ type Feature = {
 
 function FeatureCard({ icon, title, children }: Feature) {
   return (
-    <div className="group border-border bg-card hover:border-primary/20 rounded-lg border p-6 transition-colors">
+    <div className="group rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/20">
       <HugeiconsIcon icon={icon} className="mb-4 size-8 text-blue-500" />
-      <h3 className="text-foreground mb-2 text-xl font-semibold">{title}</h3>
+      <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
       <p className="text-muted-foreground">{children}</p>
     </div>
   );
@@ -56,12 +56,12 @@ function IndexPage() {
             />
             Lightning-fast development
           </Badge>
-          <h1 className="text-foreground text-5xl leading-none font-bold tracking-tight sm:text-6xl">
+          <h1 className="text-5xl leading-none font-bold tracking-tight text-foreground sm:text-6xl">
             React Vite TypeScript <br />
             Starter
           </h1>
         </div>
-        <p className="text-muted-foreground max-w-175 text-base text-balance sm:text-lg md:text-xl">
+        <p className="max-w-175 text-base text-balance text-muted-foreground sm:text-lg md:text-xl">
           A scalable, production-grade foundation with Vite, TypeScript, TanStack Router & Query,
           shadcn/ui, and Tailwind CSS pre-configured.
         </p>
@@ -74,16 +74,16 @@ function IndexPage() {
           >
             <HugeiconsIcon
               icon={GitForkIcon}
-              className="text-accent-foreground mr-3 size-4 shrink-0"
+              className="mr-3 size-4 shrink-0 text-accent-foreground"
             />
-            <code className="text-foreground font-mono text-sm whitespace-nowrap">git clone</code>
+            <code className="font-mono text-sm whitespace-nowrap text-foreground">git clone</code>
             <div className="ml-0 flex h-4 w-0 shrink-0 items-center justify-center overflow-hidden transition-all duration-300 group-hover:ml-3 group-hover:w-4">
               {copied ? (
                 <HugeiconsIcon icon={Tick02Icon} className="size-4 text-green-500" />
               ) : (
                 <HugeiconsIcon
                   icon={Copy01Icon}
-                  className="text-accent-foreground size-4 -translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                  className="size-4 -translate-x-4 text-accent-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
                 />
               )}
             </div>
@@ -105,7 +105,7 @@ function IndexPage() {
       <section className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:gap-8">
         <div>
           <h2 className="mb-4 text-3xl font-bold text-balance">Sample Integration</h2>
-          <p className="text-muted-foreground mb-6 text-balance">
+          <p className="mb-6 text-balance text-muted-foreground">
             Demonstrates TanStack React Query for efficient data fetching and server actions. Get
             started with best practices out of the box.
           </p>
@@ -116,12 +116,12 @@ function IndexPage() {
             </Link>
           </Button>
         </div>
-        <div className="border-border bg-card overflow-hidden rounded-lg border">
-          <div className="border-border bg-muted flex items-center gap-2 border-b px-4 py-2">
+        <div className="overflow-hidden rounded-lg border border-border bg-card">
+          <div className="flex items-center gap-2 border-b border-border bg-muted px-4 py-2">
             <div className="h-3 w-3 rounded-full bg-red-500/80" />
             <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <div className="h-3 w-3 rounded-full bg-green-500/80" />
-            <span className="text-muted-foreground ml-2 font-mono text-xs">sample-page.tsx</span>
+            <span className="ml-2 font-mono text-xs text-muted-foreground">sample-page.tsx</span>
           </div>
           <div className="overflow-x-auto p-4 font-mono text-sm">
             <div className="text-cyan-600">
@@ -141,19 +141,19 @@ function IndexPage() {
       <section className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 border-t border-b py-12 md:grid-cols-4">
         <div className="text-center">
           <div className="mb-1 text-3xl font-bold">0ms</div>
-          <div className="text-muted-foreground text-sm">Setup time</div>
+          <div className="text-sm text-muted-foreground">Setup time</div>
         </div>
         <div className="text-center">
           <div className="mb-1 text-3xl font-bold">100%</div>
-          <div className="text-muted-foreground text-sm">Type-safe</div>
+          <div className="text-sm text-muted-foreground">Type-safe</div>
         </div>
         <div className="text-center">
           <div className="mb-1 text-3xl font-bold">100%</div>
-          <div className="text-muted-foreground text-sm">Tools included</div>
+          <div className="text-sm text-muted-foreground">Tools included</div>
         </div>
         <div className="flex flex-col items-center">
           <div className="mb-1 text-3xl font-bold">∞</div>
-          <div className="text-muted-foreground text-sm">Scalability</div>
+          <div className="text-sm text-muted-foreground">Scalability</div>
         </div>
       </section>
     </div>
