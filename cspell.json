@@ -10,7 +10,10 @@
     "tanstack",
     "Todos",
     "Hugeicons",
-    "zustand"
+    "zustand",
+    "Turborepo",
+    "ntvs",
+    "njsproj"
   ],
   "ignorePaths": [
     "node_modules/",
