@@ -9,7 +9,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon, type IconSvgElement } from '@hugeicons/react';
 import { createFileRoute, Link } from '@tanstack/react-router';
-import React, { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { DashedGridBackground } from '@/components/dashed-grid-background';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -18,18 +18,70 @@ export const Route = createFileRoute('/')({
   component: IndexPage,
 });
 
+const cloneCommand = 'git clone https://github.com/nethsajo/starter-react-vite-ts';
+
 type Feature = {
   icon: IconSvgElement;
+  meta: string;
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
-function FeatureCard({ icon, title, children }: Feature) {
+type Metric = {
+  value: string;
+  label: string;
+};
+
+const features: Feature[] = [
+  {
+    icon: ZapIcon,
+    meta: 'vite/hmr',
+    title: 'Fast Feedback',
+    children: 'Iterate quickly with Vite, fast refresh, and a small starter surface.',
+  },
+  {
+    icon: SourceCodeIcon,
+    meta: 'ts/strict',
+    title: 'Typed By Default',
+    children: 'Start with TypeScript patterns that make route, data, and UI changes safer.',
+  },
+  {
+    icon: Rocket01Icon,
+    meta: 'app/ready',
+    title: 'Production Shape',
+    children: 'TanStack Router, Query, shadcn/ui, Tailwind, and project rules are already wired.',
+  },
+];
+
+const metrics: Metric[] = [
+  { value: '<1m', label: 'Local setup' },
+  { value: '100%', label: 'TypeScript first' },
+  { value: '7+', label: 'Core tools' },
+  { value: 'OSS', label: 'Starter base' },
+];
+
+function FeatureCard({ icon, meta, title, children }: Feature) {
   return (
-    <div className="group rounded-lg border border-border bg-card p-6 transition-colors hover:border-primary/20">
-      <HugeiconsIcon icon={icon} className="mb-4 size-8 text-blue-500" />
-      <h3 className="mb-2 text-xl font-semibold text-foreground">{title}</h3>
-      <p className="text-muted-foreground">{children}</p>
+    <article className="group rounded-md border border-border bg-card/90 p-3 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-md md:p-4 lg:p-6">
+      <div className="mb-3 flex items-center justify-between gap-3 md:mb-4">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-md border border-border bg-muted text-foreground transition-colors duration-200 group-hover:bg-background">
+          <HugeiconsIcon icon={icon} aria-hidden className="size-4" />
+        </span>
+        <span className="min-w-0 truncate font-mono text-xs text-muted-foreground">{meta}</span>
+      </div>
+      <div className="space-y-2 md:space-y-3">
+        <h3 className="text-base font-semibold text-foreground">{title}</h3>
+        <p className="text-sm leading-6 text-muted-foreground">{children}</p>
+      </div>
+    </article>
+  );
+}
+
+function MetricItem({ value, label }: Metric) {
+  return (
+    <div className="rounded-md border border-border bg-background/75 p-3 shadow-xs md:p-4">
+      <div className="font-mono text-2xl font-semibold text-foreground md:text-3xl">{value}</div>
+      <div className="mt-1 text-sm text-muted-foreground">{label}</div>
     </div>
   );
 }
@@ -37,125 +89,207 @@ function FeatureCard({ icon, title, children }: Feature) {
 function IndexPage() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText('git clone https://github.com/nethsajo/starter-react-vite-ts');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(cloneCommand);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
-    <div className="relative z-10 container mx-auto flex flex-col gap-12 px-4 py-14 sm:px-6">
+    <div className="relative isolate overflow-hidden">
       <DashedGridBackground />
-      <section className="flex flex-col items-center gap-8 text-center">
-        <div className="space-y-8">
-          <Badge className="h-7 bg-blue-100 py-1.5 font-semibold text-blue-600 [&>svg]:size-4!">
-            <HugeiconsIcon
-              icon={ZapIcon}
-              data-icon="inline-start"
-              className="animate-pulse text-blue-500"
-            />
-            Lightning-fast development
-          </Badge>
-          <h1 className="text-5xl leading-none font-bold tracking-tight text-foreground sm:text-6xl">
-            React Vite TypeScript <br />
-            Starter
-          </h1>
-        </div>
-        <p className="max-w-175 text-base text-balance text-muted-foreground sm:text-lg md:text-xl">
-          A scalable, production-grade foundation with Vite, TypeScript, TanStack Router & Query,
-          shadcn/ui, and Tailwind CSS pre-configured.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={handleCopy}
-            className="group px-6 py-3 transition-all"
+
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-3 py-4 sm:px-4 sm:py-5 md:gap-4 md:px-6 md:py-6 lg:gap-6 lg:px-8 lg:py-8">
+        <section
+          aria-labelledby="home-hero-title"
+          className="grid min-h-[calc(100svh-12rem)] items-center gap-3 md:gap-4 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)] lg:gap-6"
+        >
+          <div className="space-y-4 md:space-y-5">
+            <Badge
+              variant="outline"
+              className="h-auto max-w-full rounded-md border-dashed bg-background/85 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-xs backdrop-blur"
+            >
+              <span className="size-1.5 rounded-full bg-foreground" aria-hidden />
+              workstation-ready starter
+            </Badge>
+
+            <div className="space-y-2 md:space-y-3">
+              <h1
+                id="home-hero-title"
+                className="max-w-4xl text-4xl leading-tight font-semibold break-words text-foreground sm:text-5xl lg:text-6xl"
+              >
+                React Vite TypeScript Starter
+              </h1>
+              <p className="max-w-2xl text-base leading-7 text-pretty text-muted-foreground md:text-lg">
+                A minimal, typed workstation for building React apps with TanStack Router, Query,
+                shadcn/ui, and Tailwind already in place.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                onClick={handleCopy}
+                className="w-full justify-between gap-3 border-dashed bg-background/85 px-3 shadow-xs backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:w-auto sm:justify-center"
+              >
+                <HugeiconsIcon icon={GitForkIcon} aria-hidden className="size-4" />
+                <code className="min-w-0 font-mono text-sm text-foreground">git clone</code>
+                <span className="flex min-w-12 items-center justify-end gap-1 font-mono text-xs text-muted-foreground">
+                  {copied ? (
+                    <>
+                      copied
+                      <HugeiconsIcon
+                        icon={Tick02Icon}
+                        aria-hidden
+                        className="size-4 text-foreground"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      copy
+                      <HugeiconsIcon icon={Copy01Icon} aria-hidden className="size-4" />
+                    </>
+                  )}
+                </span>
+              </Button>
+
+              <Button
+                asChild
+                size="lg"
+                className="w-full px-3 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:w-auto"
+              >
+                <Link to="/sample">
+                  View sample
+                  <HugeiconsIcon icon={ArrowRight01Icon} aria-hidden className="size-4" />
+                </Link>
+              </Button>
+            </div>
+
+            <p aria-live="polite" className="min-h-5 text-sm text-muted-foreground">
+              {copied ? 'Clone command copied to clipboard.' : 'Ready for local development.'}
+            </p>
+          </div>
+
+          <aside
+            aria-label="Starter command preview"
+            className="overflow-hidden rounded-md border border-border bg-card/95 shadow-sm backdrop-blur"
           >
-            <HugeiconsIcon
-              icon={GitForkIcon}
-              className="mr-3 size-4 shrink-0 text-accent-foreground"
-            />
-            <code className="font-mono text-sm whitespace-nowrap text-foreground">git clone</code>
-            <div className="ml-0 flex h-4 w-0 shrink-0 items-center justify-center overflow-hidden transition-all duration-300 group-hover:ml-3 group-hover:w-4">
-              {copied ? (
-                <HugeiconsIcon icon={Tick02Icon} className="size-4 text-green-500" />
-              ) : (
-                <HugeiconsIcon
-                  icon={Copy01Icon}
-                  className="size-4 -translate-x-4 text-accent-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
-                />
-              )}
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-muted/70 px-3 py-2 md:px-4">
+              <div className="flex items-center gap-2">
+                <span className="size-2 rounded-full bg-foreground" aria-hidden />
+                <span className="font-mono text-xs text-foreground">local</span>
+              </div>
+              <span className="font-mono text-xs text-muted-foreground">starter.config.ts</span>
             </div>
-          </Button>
-        </div>
-      </section>
-      <section className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-3 lg:gap-8">
-        <FeatureCard icon={ZapIcon} title="Lightning Fast">
-          Powered by Vite and optimized for performance. Experience instant HMR and rapid builds.
-        </FeatureCard>
-        <FeatureCard icon={SourceCodeIcon} title="Type-Safe">
-          Full TypeScript support with strict mode enabled. Build with confidence and catch errors
-          early.
-        </FeatureCard>
-        <FeatureCard icon={Rocket01Icon} title="Modern Stack">
-          Pre-configured with TanStack Router, Query, shadcn/ui, and Tailwind. Ready for production.
-        </FeatureCard>
-      </section>
-      <section className="mx-auto grid w-full max-w-6xl gap-6 md:grid-cols-2 lg:gap-8">
-        <div>
-          <h2 className="mb-4 text-3xl font-bold text-balance">Sample Integration</h2>
-          <p className="mb-6 text-balance text-muted-foreground">
-            Demonstrates TanStack React Query for efficient data fetching and server actions. Get
-            started with best practices out of the box.
-          </p>
-          <Button asChild variant="link" size="lg" className="cursor-pointer px-0">
-            <Link to="/sample">
-              View Sample
-              <HugeiconsIcon icon={ArrowRight01Icon} className="size-4" />
-            </Link>
-          </Button>
-        </div>
-        <div className="overflow-hidden rounded-lg border border-border bg-card">
-          <div className="flex items-center gap-2 border-b border-border bg-muted px-4 py-2">
-            <div className="h-3 w-3 rounded-full bg-red-500/80" />
-            <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
-            <div className="h-3 w-3 rounded-full bg-green-500/80" />
-            <span className="ml-2 font-mono text-xs text-muted-foreground">sample-page.tsx</span>
+            <div className="overflow-x-auto p-3 md:p-4 lg:p-6">
+              <div className="min-w-max space-y-3 font-mono text-xs leading-6 md:text-sm">
+                <p>
+                  <span className="text-muted-foreground">$</span>{' '}
+                  <span className="text-foreground">pnpm install</span>
+                </p>
+                <p>
+                  <span className="text-muted-foreground">$</span>{' '}
+                  <span className="text-foreground">pnpm dev</span>
+                </p>
+                <p className="text-muted-foreground">
+                  vite ready <span className="text-foreground">localhost:5173</span>
+                </p>
+                <p>
+                  <span className="text-muted-foreground">stack:</span>{' '}
+                  <span className="text-foreground">react + vite + tanstack + shadcn</span>
+                </p>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section aria-labelledby="stack-heading" className="space-y-3 md:space-y-4">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end md:gap-4">
+            <div className="space-y-2 md:space-y-3">
+              <p className="font-mono text-xs text-muted-foreground">/src/routes/index.tsx</p>
+              <h2 id="stack-heading" className="text-2xl font-semibold text-foreground md:text-3xl">
+                Built for focused app work.
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-muted-foreground">
+              Start from a disciplined React stack with typed routing, query flow, and reusable UI
+              primitives already organized.
+            </p>
           </div>
-          <div className="overflow-x-auto p-4 font-mono text-sm">
-            <div className="text-cyan-600">
-              import <span className="text-blue-500">{'{ useQuery }'}</span>{' '}
-              <span className="text-cyan-600">from</span>{' '}
-              <span className="text-green-600">'@tanstack/react-query'</span>
+
+          <div className="grid gap-3 md:grid-cols-3 md:gap-4 lg:gap-6">
+            {features.map(feature => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
+          </div>
+        </section>
+
+        <section
+          aria-labelledby="sample-heading"
+          className="grid gap-3 md:gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-6"
+        >
+          <div className="rounded-md border border-dashed border-border bg-background/80 p-3 shadow-xs backdrop-blur md:p-4 lg:p-6">
+            <div className="space-y-2 md:space-y-3">
+              <p className="font-mono text-xs text-muted-foreground">/_protected/sample</p>
+              <h2
+                id="sample-heading"
+                className="text-2xl font-semibold text-foreground md:text-3xl"
+              >
+                Sample integration
+              </h2>
+              <p className="text-sm leading-6 text-muted-foreground">
+                A protected route demonstrates TanStack Query flow, mutation structure, and the
+                starter project conventions in one place.
+              </p>
             </div>
-            <div className="mt-2 text-slate-400">// Your data fetching logic here</div>
-            <div className="mt-2 text-cyan-600">
-              <span className="text-blue-500">const</span> {'{ data, isLoading } ='}{' '}
-              <span className="text-blue-500">useQuery</span>
-              <span className="text-slate-400">{'{...}'}</span>
+            <Button asChild variant="link" className="mt-4 h-auto px-0 text-sm font-medium md:mt-5">
+              <Link to="/sample">
+                Open sample route
+                <HugeiconsIcon icon={ArrowRight01Icon} aria-hidden className="size-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="overflow-hidden rounded-md border border-border bg-card shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-muted/70 px-3 py-2 md:px-4">
+              <span className="font-mono text-xs text-foreground">sample-page.tsx</span>
+              <span className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                query hook
+              </span>
+            </div>
+            <div className="overflow-x-auto p-3 md:p-4 lg:p-6">
+              <div className="min-w-max space-y-2 font-mono text-xs leading-6 md:text-sm">
+                <p>
+                  <span className="text-muted-foreground">import</span>{' '}
+                  <span className="text-foreground">{'{ useQuery }'}</span>{' '}
+                  <span className="text-muted-foreground">from</span>{' '}
+                  <span className="text-foreground">'@tanstack/react-query'</span>
+                </p>
+                <p className="text-muted-foreground">// route-level data stays predictable</p>
+                <p>
+                  <span className="text-muted-foreground">const</span>{' '}
+                  <span className="text-foreground">{'{ data, isLoading } = useQuery(...)'}</span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-6 border-t border-b py-12 md:grid-cols-4">
-        <div className="text-center">
-          <div className="mb-1 text-3xl font-bold">0ms</div>
-          <div className="text-sm text-muted-foreground">Setup time</div>
-        </div>
-        <div className="text-center">
-          <div className="mb-1 text-3xl font-bold">100%</div>
-          <div className="text-sm text-muted-foreground">Type-safe</div>
-        </div>
-        <div className="text-center">
-          <div className="mb-1 text-3xl font-bold">100%</div>
-          <div className="text-sm text-muted-foreground">Tools included</div>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-1 text-3xl font-bold">∞</div>
-          <div className="text-sm text-muted-foreground">Scalability</div>
-        </div>
-      </section>
+        </section>
+
+        <section
+          aria-label="Starter project metrics"
+          className="grid grid-cols-2 gap-3 border-y border-dashed border-border py-3 md:grid-cols-4 md:gap-4 md:py-4 lg:gap-6 lg:py-6"
+        >
+          {metrics.map(metric => (
+            <MetricItem key={metric.label} {...metric} />
+          ))}
+        </section>
+      </div>
     </div>
   );
 }

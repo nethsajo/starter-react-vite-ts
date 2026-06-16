@@ -50,6 +50,20 @@ export function Navbar() {
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  asChild
+                  className="bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent"
+                >
+                  <Link
+                    to="/posts"
+                    activeProps={{ className: 'font-bold text-primary' }}
+                    inactiveProps={{ className: 'font-medium text-gray-500' }}
+                  >
+                    Posts
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>

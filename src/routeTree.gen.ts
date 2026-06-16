@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProtectedLayoutRouteImport } from './routes/_protected/layout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RegisterIndexRouteImport } from './routes/register/index'
+import { Route as PostsIndexRouteImport } from './routes/posts/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ForgotPasswordIndexRouteImport } from './routes/forgot-password/index'
 import { Route as ProtectedSampleRouteImport } from './routes/_protected/sample'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const RegisterIndexRoute = RegisterIndexRouteImport.update({
   id: '/register/',
   path: '/register/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsIndexRoute = PostsIndexRouteImport.update({
+  id: '/posts/',
+  path: '/posts/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginIndexRoute = LoginIndexRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/sample': typeof ProtectedSampleRoute
   '/forgot-password/': typeof ForgotPasswordIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/posts/': typeof PostsIndexRoute
   '/register/': typeof RegisterIndexRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/sample': typeof ProtectedSampleRoute
   '/forgot-password': typeof ForgotPasswordIndexRoute
   '/login': typeof LoginIndexRoute
+  '/posts': typeof PostsIndexRoute
   '/register': typeof RegisterIndexRoute
 }
 export interface FileRoutesById {
@@ -67,13 +75,20 @@ export interface FileRoutesById {
   '/_protected/sample': typeof ProtectedSampleRoute
   '/forgot-password/': typeof ForgotPasswordIndexRoute
   '/login/': typeof LoginIndexRoute
+  '/posts/': typeof PostsIndexRoute
   '/register/': typeof RegisterIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sample' | '/forgot-password/' | '/login/' | '/register/'
+  fullPaths:
+    | '/'
+    | '/sample'
+    | '/forgot-password/'
+    | '/login/'
+    | '/posts/'
+    | '/register/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sample' | '/forgot-password' | '/login' | '/register'
+  to: '/' | '/sample' | '/forgot-password' | '/login' | '/posts' | '/register'
   id:
     | '__root__'
     | '/'
@@ -81,6 +96,7 @@ export interface FileRouteTypes {
     | '/_protected/sample'
     | '/forgot-password/'
     | '/login/'
+    | '/posts/'
     | '/register/'
   fileRoutesById: FileRoutesById
 }
@@ -89,6 +105,7 @@ export interface RootRouteChildren {
   ProtectedLayoutRoute: typeof ProtectedLayoutRouteWithChildren
   ForgotPasswordIndexRoute: typeof ForgotPasswordIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
+  PostsIndexRoute: typeof PostsIndexRoute
   RegisterIndexRoute: typeof RegisterIndexRoute
 }
 
@@ -113,6 +130,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register/'
       preLoaderRoute: typeof RegisterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts/': {
+      id: '/posts/'
+      path: '/posts'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof PostsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login/': {
@@ -156,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProtectedLayoutRoute: ProtectedLayoutRouteWithChildren,
   ForgotPasswordIndexRoute: ForgotPasswordIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
+  PostsIndexRoute: PostsIndexRoute,
   RegisterIndexRoute: RegisterIndexRoute,
 }
 export const routeTree = rootRouteImport
